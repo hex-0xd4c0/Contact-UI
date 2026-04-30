@@ -117,19 +117,20 @@ const RiskAlerts = () => {
       dataIndex: 'title',
       key: 'title',
       width: 200,
+      ellipsis: true,
       render: (title: string, record: Alert) => (
-        <Space>
+        <div className="truncate flex items-center gap-1.5" title={title}>
           <WarningOutlined
-            className={
+            className={`shrink-0 ${
               record.severity === 'high'
                 ? 'text-red-500'
                 : record.severity === 'medium'
                 ? 'text-orange-500'
                 : 'text-blue-500'
-            }
+            }`}
           />
-          <Text strong>{title}</Text>
-        </Space>
+          <span className="font-semibold truncate">{title}</span>
+        </div>
       ),
     },
     {

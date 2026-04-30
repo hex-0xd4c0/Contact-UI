@@ -44,10 +44,10 @@
       "delivered": "已交付"
     },
     "transportMethod": {
-      "Sea Freight": "海运",
-      "Air Freight": "空运",
-      "Rail Freight": "铁路运输",
-      "Truck": "卡车运输"
+      "sea": "海运",
+      "air": "空运",
+      "rail": "铁路运输",
+      "truck": "卡车运输"
     }
   },
   "documentType": {

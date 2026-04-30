@@ -117,8 +117,8 @@ router.get('/recent-alerts', async (req: Request, res: Response) => {
     const result = await query(`
       SELECT
         ra.id, ra.shipment_id as "shipmentId", ra.alert_type as "alertType",
-        ra.severity, ra.title, ra.message, ra.status,
-        ra.created_at as "createdAt"
+        ra.severity, ra.title, ra.message as "description", ra.status,
+        ra.created_at as "detectedAt"
       FROM risk_alerts ra
       LEFT JOIN shipments s ON ra.shipment_id = s.id
       ${whereClause}

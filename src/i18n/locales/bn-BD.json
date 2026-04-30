@@ -44,10 +44,10 @@
       "delivered": "ডেলিভারি সম্পন্ন"
     },
     "transportMethod": {
-      "Sea Freight": "সমুদ্রপথ",
-      "Air Freight": "বিমানপথ",
-      "Rail Freight": "রেলপথ",
-      "Truck": "ট্রাক"
+      "sea": "সমুদ্রপথ",
+      "air": "বিমানপথ",
+      "rail": "রেলপথ",
+      "truck": "ট্রাক"
     }
   },
   "documentType": {

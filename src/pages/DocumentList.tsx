@@ -133,12 +133,16 @@ const DocumentList = () => {
       dataIndex: 'docType',
       key: 'docType',
       width: 140,
-      render: (type: DocType) => (
-        <Space>
-          <FileOutlined className="text-blue-500" />
-          <Text>{t(`documentType.${type}`) !== `documentType.${type}` ? t(`documentType.${type}`) : type}</Text>
-        </Space>
-      ),
+      ellipsis: true,
+      render: (type: DocType) => {
+        const label = t(`documentType.${type}`) !== `documentType.${type}` ? t(`documentType.${type}`) : type;
+        return (
+          <div className="truncate flex items-center gap-1.5" title={label}>
+            <FileOutlined className="text-blue-500 shrink-0" />
+            <span className="truncate">{label}</span>
+          </div>
+        );
+      },
     },
     {
       title: t('documents.columns.fileName'),

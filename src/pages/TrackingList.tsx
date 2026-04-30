@@ -98,14 +98,14 @@ const TrackingList = () => {
     {
       title: t('tracking.route'),
       key: 'route',
+      width: 200,
+      ellipsis: true,
       render: (_: unknown, record: Shipment) => (
-        <Text>
+        <div className="truncate" title={`${record.origin} → ${record.destination}`}>
           {record.origin}
-          <Text type="secondary" className="mx-1">
-            →
-          </Text>
+          <span className="mx-1 text-gray-400">→</span>
           {record.destination}
-        </Text>
+        </div>
       ),
     },
     {

@@ -33,7 +33,7 @@ export const DOC_TYPES = {
   bill_of_lading: '提单',
 } as const;
 
-export const TRANSPORT_METHODS = ['Sea Freight', 'Air Freight', 'Rail Freight', 'Truck'] as const;
+export const TRANSPORT_METHODS = ['sea', 'air', 'rail', 'truck'] as const;
 
 export const CURRENCIES = ['USD', 'CNY', 'EUR'] as const;
 

@@ -56,12 +56,12 @@ router.get('/', async (req: Request, res: Response) => {
         ra.id, ra.shipment_id as "shipmentId",
         s.shipment_id as "shipmentCode",
         ra.alert_type as "alertType", ra.severity,
-        ra.title, ra.message, ra.status,
+        ra.title, ra.message as "description", ra.status,
         ra.acknowledged_by as "acknowledgedBy",
         ra.acknowledged_at as "acknowledgedAt",
         ra.resolved_by as "resolvedBy",
         ra.resolved_at as "resolvedAt",
-        ra.created_at as "createdAt"
+        ra.created_at as "detectedAt"
       FROM risk_alerts ra
       LEFT JOIN shipments s ON ra.shipment_id = s.id
       ${whereClause}
@@ -118,8 +118,8 @@ router.get('/stats', async (req: Request, res: Response) => {
   }
 });
 
-// PUT /alerts/:id/acknowledge
-router.put('/:id/acknowledge', async (req: Request, res: Response) => {
+// POST /alerts/:id/acknowledge
+router.post('/:id/acknowledge', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
@@ -155,10 +155,10 @@ router.put('/:id/acknowledge', async (req: Request, res: Response) => {
        RETURNING
          id, shipment_id as "shipmentId",
          alert_type as "alertType", severity,
-         title, message, status,
+         title, message as "description", status,
          acknowledged_by as "acknowledgedBy",
          acknowledged_at as "acknowledgedAt",
-         created_at as "createdAt"`,
+         created_at as "detectedAt"`,
       [req.user!.userId, id]
     );
 
@@ -169,8 +169,8 @@ router.put('/:id/acknowledge', async (req: Request, res: Response) => {
   }
 });
 
-// PUT /alerts/:id/resolve
-router.put('/:id/resolve', async (req: Request, res: Response) => {
+// POST /alerts/:id/resolve
+router.post('/:id/resolve', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
@@ -206,10 +206,10 @@ router.put('/:id/resolve', async (req: Request, res: Response) => {
        RETURNING
          id, shipment_id as "shipmentId",
          alert_type as "alertType", severity,
-         title, message, status,
+         title, message as "description", status,
          resolved_by as "resolvedBy",
          resolved_at as "resolvedAt",
-         created_at as "createdAt"`,
+         created_at as "detectedAt"`,
       [req.user!.userId, id]
     );
 
@@ -242,8 +242,8 @@ router.post('/', requireAdmin, async (req: Request, res: Response) => {
        RETURNING
          id, shipment_id as "shipmentId",
          alert_type as "alertType", severity,
-         title, message, status,
-         created_at as "createdAt"`,
+         title, message as "description", status,
+         created_at as "detectedAt"`,
       [parseInt(shipmentId, 10), alertType, severity, title, message, userId || null]
     );
 

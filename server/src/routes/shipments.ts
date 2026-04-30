@@ -145,6 +145,34 @@ router.get('/:id/timeline', async (req: Request, res: Response) => {
   }
 });
 
+// GET /shipments/:id/documents
+router.get('/:id/documents', async (req: Request, res: Response) => {
+  try {
+    const shipmentId = parseInt(req.params.id, 10);
+    if (isNaN(shipmentId)) {
+      res.status(400).json({ message: '无效的运单ID' });
+      return;
+    }
+
+    const result = await query(
+      `SELECT
+        id, shipment_id as "shipmentId", doc_type as "docType",
+        file_url as "fileUrl", status, uploaded_by as "uploadedBy",
+        uploaded_at as "uploadedAt", verified_by as "verifiedBy",
+        verified_at as "verifiedAt", expiry_date as "expiryDate"
+      FROM documents
+      WHERE shipment_id = $1
+      ORDER BY uploaded_at DESC`,
+      [shipmentId]
+    );
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Get documents error:', error);
+    res.status(500).json({ message: '获取文件列表失败' });
+  }
+});
+
 // GET /shipments/:id/current-location
 router.get('/:id/current-location', async (req: Request, res: Response) => {
   try {

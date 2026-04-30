@@ -44,10 +44,10 @@
       "delivered": "Delivered"
     },
     "transportMethod": {
-      "Sea Freight": "Sea Freight",
-      "Air Freight": "Air Freight",
-      "Rail Freight": "Rail Freight",
-      "Truck": "Truck"
+      "sea": "Sea Freight",
+      "air": "Air Freight",
+      "rail": "Rail Freight",
+      "truck": "Truck"
     }
   },
   "documentType": {
