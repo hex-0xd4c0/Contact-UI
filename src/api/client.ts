@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { API_BASE_URL } from '@/utils/constants';
+import { USE_MOCK } from '@/config';
+import { mockAdapter } from '@/mock';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -7,6 +9,10 @@ const apiClient = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+if (USE_MOCK) {
+  apiClient.defaults.adapter = mockAdapter as any;
+}
 
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem('accessToken');
